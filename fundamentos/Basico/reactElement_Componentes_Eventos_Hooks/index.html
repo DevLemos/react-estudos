@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Básico</title>
+
+    <!-- Carrega o React, React Dom e Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      //Elemento JSX
+      function App1() {
+        return <div id="main">Meu App</div>;
+      }
+
+      //Transformado em uma função React pelo babel:
+      function App2() {
+        return React.createElement("div", { id: "main" }, "Meu App");
+      }
+
+      //Expressões JavaScript { }
+      const Produtos = () => {
+        const produto1 = "Camisas";
+        const produto2 = "Bermudas";
+
+        function handleClick(event) {
+          console.log("Comprou " + event.target.innerText);
+        }
+
+        return (
+          <div>
+            <button onClick={handleClick}>
+              {produto1} - R$ {Math.random() * 100}
+            </button>
+            <button onClick={handleClick}>
+              {produto2} - R$ {Math.random() * 100}
+            </button>
+          </div>
+        );
+      };
+
+      //Componente
+      const Button = () => {
+        return <button>Comprar</button>;
+      };
+
+      //Componente
+      const MainNav = () => {
+        return (
+          <nav>
+            <ul>
+              <li>
+                <a href="#">Link 1</a>
+              </li>
+              <li>
+                <a href="#">Link 2</a>
+              </li>
+            </ul>
+          </nav>
+        );
+      };
+
+      //Hooks
+      const Comprar = () => {
+        const [count, setCount] = React.useState(0);
+
+        return (
+          <div>
+            <button onClick={ () => setCount(count + 1)}>Comprar {count}</button>
+            <p>Total {count}</p>
+            <p>Preço {count * 250}</p>
+          </div>
+        );
+      };
+
+      const App = () => {
+        return (
+          <div>
+            <div>Teste</div>
+            <MainNav />
+            <Produtos />
+            <Button />
+            <Comprar />
+          </div>
+        );
+      };
+
+      const container = document.getElementById("container");
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+    </script>
+  </body>
+</html>
