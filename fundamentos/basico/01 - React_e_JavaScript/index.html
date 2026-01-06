@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React e JavaScript</title>
+
+    <!-- Carrega o React, React Dom e Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app-javaScript">
+      <p>Total <span id="total"></span></p>
+      <p>Preço R$ <span id="preco"></span></p>
+      <button id="btnComprar">Comprar</button>
+    </div>
+
+    <script type="application/javascript">
+      const total = document.getElementById("total");
+      const preco = document.getElementById("preco");
+      const botao = document.getElementById("btnComprar");
+
+      let contador = 1;
+
+      function atualizarConteudo() {
+        total.innerText = contador;
+        preco.innerText = contador * 250;
+        botao.innerText = 'Comprar ' + contador;
+      }
+
+      atualizarConteudo();
+
+      botao.addEventListener("click", () => {
+        ++contador;
+        atualizarConteudo();
+      });
+    </script>
+
+    <div id="app-react"></div>
+
+    <script type="text/babel">
+
+        const Comprar = () => {
+            const [count, setCount] = React.useState(1);
+
+            return (
+                <div>
+                    <p>Total {count}</p>
+                    <p>Preço R$ {count * 250}</p>
+                    <button onClick={() => setCount(count + 1)} >Comprar {count}</button>
+                </div>
+            );
+        }
+
+      ReactDOM.createRoot(document.getElementById("app-react")).render(<Comprar />);
+    </script>
+  </body>
+</html>
